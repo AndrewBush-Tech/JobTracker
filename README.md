@@ -75,12 +75,12 @@ This will import the job listings from the SQLite file into your PostgreSQL job 
 
 
 ### 🌐 API Endpoints
-Method	Endpoint	Description
-GET	/api/applications	List all job applications
-POST	/api/applications	Create a new application
-PUT	/api/applications/{id}	Update a job application
-DELETE	/api/applications/{id}	Delete a job application
-POST	/api/applications/import	Import jobs from jobs.db
+#### Method	         Endpoint	                  Description
+      GET	   /api/applications	         List all job applications
+      POST	   /api/applications	         Create a new application
+      PUT	   /api/applications/{id}	   Update a job application
+      DELETE	/api/applications/{id}	   Delete a job application
+      POST	   /api/applications/import	Import jobs from jobs.db
 
 ---
 
