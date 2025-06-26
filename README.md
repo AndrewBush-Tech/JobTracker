@@ -31,8 +31,15 @@ Built with:
 ```bash
 cd jobtracker
 ```
+3. Change password if possible for PostgreSQL access.
 
-3. Run the Spring Boot application:
+Navigate to ./jobtracker/src/main/resources/application.properties replace "your_password_here" here:
+
+```bash
+ spring.datasource.password=your_password_here
+```
+
+4. Run the Spring Boot application:
 
 ```bash
 ./mvnw spring-boot:run
