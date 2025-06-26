@@ -1,0 +1,34 @@
+# Build output and system files
+target/
+*.class
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# IntelliJ & VS Code
+.idea/
+.vscode/
+*.iml
+
+# Maven
+.mvn/
+.mvnw
+.mvnw.cmd
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore local database and exported files
+jobs.db
+exported_jobs.json
+
+# Secrets
+*.env
+*.secret
+src/main/resources/application.properties
+src/main/resources/application.yml
