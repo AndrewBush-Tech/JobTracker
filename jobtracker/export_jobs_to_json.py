@@ -2,7 +2,7 @@ import sqlite3
 import json
 from datetime import datetime
 
-DB_PATH = "../jobfinder/jobs.db"
+DB_PATH = "../../jobfinder/jobs.db"
 OUTPUT_FILE = "exported_jobs.json"
 
 ENTRY_LEVEL_EXCLUDE = ["senior", "lead", "staff", "manager"]

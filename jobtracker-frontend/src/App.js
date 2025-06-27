@@ -11,7 +11,7 @@ function App() {
     deadline: '',
     jobLink: ''
   });
-  const [editingId, setEditingId] = useState(null); // <-- New state for tracking edit mode
+  const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
     fetchApplications();
@@ -30,10 +30,8 @@ function App() {
     e.preventDefault();
     try {
       if (editingId) {
-        // ✅ PUT request for update
         await axios.put(`http://localhost:8080/api/applications/${editingId}`, formData);
       } else {
-        // ✅ POST request for new entry
         await axios.post('http://localhost:8080/api/applications', formData);
       }
       resetForm();
@@ -98,81 +96,83 @@ function App() {
 
   return (
     <div className="App">
-      <h1>💼 Job Application Tracker</h1>
+      <div className="sticky-header">
+        <h1>💼 Job Application Tracker</h1>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="company"
-          placeholder="Company"
-          value={formData.company}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="position"
-          placeholder="Position"
-          value={formData.position}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="status"
-          placeholder="Status (e.g., Applied, Interview)"
-          value={formData.status}
-          onChange={handleChange}
-        />
-        <input
-          type="date"
-          name="deadline"
-          value={formData.deadline}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="jobLink"
-          placeholder="Job Link"
-          value={formData.jobLink}
-          onChange={handleChange}
-        />
-        <button type="submit">
-          {editingId ? "Update Application" : "Add Application"}
-        </button>
-        {editingId && (
-          <button type="button" onClick={resetForm} style={{ marginLeft: '10px' }}>
-            Cancel
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="company"
+            placeholder="Company"
+            value={formData.company}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="position"
+            placeholder="Position"
+            value={formData.position}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="status"
+            placeholder="Status (e.g., Applied, Interview)"
+            value={formData.status}
+            onChange={handleChange}
+          />
+          <input
+            type="date"
+            name="deadline"
+            value={formData.deadline}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="jobLink"
+            placeholder="Job Link"
+            value={formData.jobLink}
+            onChange={handleChange}
+          />
+          <button type="submit">
+            {editingId ? "Update Application" : "Add Application"}
           </button>
-        )}
-      </form>
+          {editingId && (
+            <button type="button" onClick={resetForm} style={{ marginLeft: '10px' }}>
+              Cancel
+            </button>
+          )}
+        </form>
 
-      <hr />
-
-      <div>
-        <label>📤 Import Job Applications (JSON): </label>
-        <input type="file" accept=".json" onChange={handleFileUpload} />
+        <div style={{ marginTop: '10px' }}>
+          <label>📤 Import Job Applications (JSON): </label>
+          <input type="file" accept=".json" onChange={handleFileUpload} />
+        </div>
       </div>
 
-      <ul>
-        {applications.map(app => (
-          <li key={app.id}>
-            <strong>{app.company}</strong> - {app.position} ({app.status})
-            {app.deadline && <> — Deadline: {app.deadline}</>}
-            {app.jobLink && (
-              <>
-                {' '} — <a href={app.jobLink} target="_blank" rel="noreferrer">View</a>
-              </>
-            )}
-            <button onClick={() => handleEdit(app)} style={{ marginLeft: '10px' }}>
-              Edit
-            </button>
-            <button onClick={() => handleDelete(app.id)} style={{ marginLeft: '10px' }}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className="application-list">
+        <ul>
+          {applications.map(app => (
+            <li key={app.id}>
+              <strong>{app.company}</strong> - {app.position} ({app.status})
+              {app.deadline && <> — Deadline: {app.deadline}</>}
+              {app.jobLink && (
+                <>
+                  {' '} — <a href={app.jobLink} target="_blank" rel="noreferrer">View</a>
+                </>
+              )}
+              <button onClick={() => handleEdit(app)} style={{ marginLeft: '10px' }}>
+                Edit
+              </button>
+              <button onClick={() => handleDelete(app.id)} style={{ marginLeft: '10px' }}>
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

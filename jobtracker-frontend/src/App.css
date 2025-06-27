@@ -3,6 +3,27 @@
   margin: 2rem auto;
   font-family: sans-serif;
 }
+
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1000;
+  padding: 10px;
+  border-bottom: 2px solid #ccc;
+}
+
+form input,
+form button {
+  margin: 5px;
+  padding: 8px;
+}
+
+.application-list {
+  margin-top: 20px;
+}
+
 form input {
   margin: 0.5rem;
   padding: 0.5rem;

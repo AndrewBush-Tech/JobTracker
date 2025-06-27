@@ -1,4 +1,3 @@
-// --- JobApplicationController.java ---
 package com.jobtracker.controller;
 
 import com.jobtracker.model.JobApplication;
@@ -24,11 +23,15 @@ public class JobApplicationController {
 
     @PostMapping
     public JobApplication create(@RequestBody JobApplication job) {
+        if (job.getDeadline() == null) {
+            job.setDeadline(java.time.LocalDate.now());
+        }
         return repo.save(job);
     }
 
     @PutMapping("/{id}")
-    public JobApplication update(@PathVariable Long id, @RequestBody JobApplication job) {
+    public JobApplication update(@PathVariable("id") Long id, @RequestBody JobApplication job) {
+        System.out.println("🔄 Updating job ID: " + id);
         job.setId(id);
         return repo.save(job);
     }
@@ -42,7 +45,6 @@ public class JobApplicationController {
         return ResponseEntity.ok().build();
     }
 
-    // ✅ Bulk Upload Endpoint
     @PostMapping("/bulk-upload")
     public List<JobApplication> bulkUpload(@RequestBody List<JobApplication> jobs) {
         return repo.saveAll(jobs);
